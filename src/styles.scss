@@ -1,1 +1,33 @@
-/* You can add global styles to this file, and also import other style files */
+@import "@angular/material/prebuilt-themes/indigo-pink.css";
+@import "~firebaseui/dist/firebaseui.css";
+
+.firebaseui-container {
+  margin: 0;
+}
+
+span:not(.mat-button-ripple) {
+  margin: 0 5px;
+}
+
+.mat-snack-bar-container {
+  background-color: hotpink;
+  color: black;
+}
+
+.mat-simple-snackbar-action {
+  color: white;
+}
+
+@media screen and (max-width: 600px) {
+  .mat-dialog-container {
+    padding-left: 10px !important;
+    padding-right: 10px !important;
+  }
+}
+
+@media screen and (max-height: 480px) {
+  .mat-dialog-container {
+    padding-top: 10px !important;
+    padding-bottom: 10px !important;
+  }
+}
