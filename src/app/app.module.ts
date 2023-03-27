@@ -1,18 +1,19 @@
 import {NgModule} from '@angular/core';
-import {provideFirebaseApp} from '@angular/fire/app';
-import {provideAuth} from '@angular/fire/auth';
-import {MatButtonModule} from "@angular/material/button";
-import {MatIconModule} from "@angular/material/icon";
+import {FirebaseApp, provideFirebaseApp} from '@angular/fire/app';
+import {Auth, provideAuth} from '@angular/fire/auth';
+
+import {MatButtonModule} from '@angular/material/button';
+import {MatIconModule} from '@angular/material/icon';
+import {MAT_SNACK_BAR_DEFAULT_OPTIONS, MatSnackBarModule} from '@angular/material/snack-bar';
 import {BrowserModule} from '@angular/platform-browser';
-import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
-import {RouterModule, Routes} from "@angular/router";
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import {RouterModule, Routes} from '@angular/router';
+import {initializeApp} from 'firebase/app';
 import {getAuth} from 'firebase/auth';
-import firebase from "firebase/compat/app";
-import {environment} from "../environments/environment";
+import {environment} from '../environments/environment';
 import {AppComponent} from './app.component';
 import {LoginComponent} from './components/login/login.component';
-import {LoginButtonComponent} from './components/login-button/login-button.component';
-import initializeApp = firebase.initializeApp;
+
 
 const appRoutes: Routes = [
   {
@@ -21,11 +22,13 @@ const appRoutes: Routes = [
   },
 ];
 
+const app: FirebaseApp = initializeApp(environment.firebase);
+const auth: Auth = getAuth(app);
+
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
-    LoginButtonComponent
   ],
   imports: [
     BrowserModule,
@@ -34,12 +37,18 @@ const appRoutes: Routes = [
       appRoutes,
       environment.router
     ),
-    provideFirebaseApp(() => initializeApp(environment.firebase)),
-    provideAuth(() => getAuth()),
+    provideFirebaseApp(() => app),
+    provideAuth(() => auth),
     MatButtonModule,
     MatIconModule,
+    MatSnackBarModule,
   ],
-  providers: [],
+  providers: [
+    {
+      provide: MAT_SNACK_BAR_DEFAULT_OPTIONS,
+      useValue: {verticalPosition: 'top', duration: 5000}
+    },
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule {

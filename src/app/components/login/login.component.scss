@@ -1,0 +1,21 @@
+:host {
+  .container {
+    max-width: 640px;
+  }
+
+  ::ng-deep .firebaseui-idp-generic > .firebaseui-idp-text {
+    color: #0b366b;
+  }
+
+  .info {
+
+    margin-top: 20px;
+    border-spacing: 0;
+    border: solid black 1px;
+
+    td {
+      border: solid black 1px;
+      padding: 8px;
+    }
+  }
+}

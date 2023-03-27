@@ -1,3 +1,6 @@
 <h2>Login test</h2>
 <router-outlet></router-outlet>
-<app-login-button *ngIf="!router.url.startsWith('/login')"></app-login-button>
+<button class="login" mat-raised-button [routerLink]="['/login']" *ngIf="!router.url.startsWith('/login')">
+  <mat-icon>exit_to_app</mat-icon>
+  Log in
+</button>
